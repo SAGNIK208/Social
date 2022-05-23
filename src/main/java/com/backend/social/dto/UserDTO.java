@@ -10,21 +10,19 @@ import javax.validation.constraints.*;
 @NoArgsConstructor
 public class UserDTO {
 
-    @Id
-    public String id;
 
-    @NotNull(message = "name is missing")
+    @NotBlank(message = "name is missing")
     public String name;
 
-    @NotNull(message = "password is missing")
+    @NotBlank(message = "password is missing")
     @Size(min = 8,message = "minimum password size is 8")
     public String password;
 
-    @NotNull(message = "phone no missing")
+    @NotBlank(message = "phone no missing")
     @Pattern(regexp = "[0-9]{10}")
     public String phone;
 
-    @NotNull(message = "email is missing")
+    @NotBlank(message = "email is missing")
     @Email(message = "invalid email")
     public String email;
 
@@ -33,10 +31,10 @@ public class UserDTO {
     @Max(value = 100,message = "maximum age is 100")
     public Integer age;
 
-    @NotNull(message = "gender is missing")
+    @NotBlank(message = "gender is missing")
     public String gender;
 
-    @NotNull(message = "Address is missing")
+    @NotBlank(message = "Address is missing")
     public String address;
 
 
