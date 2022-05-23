@@ -1,5 +1,6 @@
 package com.backend.social.controller;
 
+import com.backend.social.dto.LoginRequest;
 import com.backend.social.dto.UserDTO;
 import com.backend.social.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,24 @@ public class HomeController {
     @Autowired
     private UserService userService;
 
+    @GetMapping("/success")
+    public String success(){
+        return "Success";
+    }
+
     @PostMapping(value = "/register", consumes = {"multipart/form-data"})
     public ResponseEntity register(@Valid @ModelAttribute UserDTO userDTO) {
 
+        try {
+            userService.registerUserService(userDTO);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body("New User Created");
+    }
+
+    @PostMapping(value = "/login", consumes = {"multipart/form-data"})
+    public ResponseEntity login(@Valid @ModelAttribute LoginRequest loginRequest) {
         try {
             userService.registerUserService(userDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body("New User Created");
