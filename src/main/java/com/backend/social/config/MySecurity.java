@@ -48,10 +48,12 @@ public class MySecurity extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeHttpRequests()
-                .antMatchers("/social/v1/register").permitAll()
-                .antMatchers("/social/v1/login").permitAll()
+                .antMatchers("/register").permitAll()
+                .antMatchers("/login").permitAll()
                 .anyRequest().authenticated()
-                .and().sessionManagement()
+                .and()
+//                .oauth2Login();
+                .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);

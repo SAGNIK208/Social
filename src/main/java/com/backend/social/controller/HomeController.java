@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/social/v1")
 public class HomeController {
 
     @Autowired
@@ -37,6 +36,9 @@ public class HomeController {
     public String success(){
         return "Success";
     }
+
+    @GetMapping("/")
+    public String home(){ return "Hello World"; }
 
     @PostMapping(value = "/register", consumes = {"multipart/form-data"})
     public ResponseEntity register(@Valid @ModelAttribute UserDTO userDTO) {
