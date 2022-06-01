@@ -3,6 +3,7 @@ package com.backend.social.services;
 import com.backend.social.dto.PostDTO;
 import com.backend.social.exceptions.InvalidPostException;
 import com.backend.social.exceptions.UnauthorizedUserException;
+import com.backend.social.models.CommentEntity;
 import com.backend.social.models.PostEntity;
 import com.backend.social.models.UserEntity;
 import com.backend.social.repositories.PostRepository;
@@ -43,7 +44,7 @@ public class PostService {
         postRepository.save(postEntity);
     }
 
-    public void deletePost(String id) throws InvalidPostException , UnauthorizedUserException {
+    public void deletePost(Integer id) throws InvalidPostException , UnauthorizedUserException {
         UserEntity user = getAuthenticatedUser();
         Optional<PostEntity> postEntity = postRepository.findById(id);
         if(postEntity.isPresent()){
@@ -57,7 +58,7 @@ public class PostService {
         }
     }
 
-    public void updatePost(PostDTO post,String id) throws InvalidPostException,UnauthorizedUserException{
+    public void updatePost(PostDTO post,Integer id) throws InvalidPostException,UnauthorizedUserException{
         UserEntity user = getAuthenticatedUser();
         Optional<PostEntity> postEntity = postRepository.findById(id);
         if(postEntity.isPresent()){

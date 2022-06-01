@@ -1,12 +1,9 @@
 package com.backend.social.controller;
 
 import com.backend.social.dto.CommentDTO;
-import com.backend.social.dto.PostDTO;
 import com.backend.social.exceptions.InvalidCommentException;
 import com.backend.social.exceptions.InvalidPostException;
 import com.backend.social.exceptions.UnauthorizedUserException;
-import com.backend.social.models.CommentEntity;
-import com.backend.social.models.PostEntity;
 import com.backend.social.services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +12,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/posts/{id}")
@@ -26,7 +22,7 @@ public class CommentController {
 
 
     @PostMapping(value = "/create-comments" , consumes = {"multipart/form-data"})
-    public ResponseEntity createComment(@Valid @ModelAttribute CommentDTO commentDTO,@PathVariable("id") String postId){
+    public ResponseEntity createComment(@Valid @ModelAttribute CommentDTO commentDTO,@PathVariable("id") Integer postId){
         try {
             commentService.createComment(commentDTO,postId);
         } catch (UsernameNotFoundException u) {
@@ -36,7 +32,7 @@ public class CommentController {
     }
 
     @DeleteMapping(value = "/delete-comment/{commentId}")
-    public ResponseEntity deleteComment(@PathVariable("id") String postId,@PathVariable("commentId") String commentId){
+    public ResponseEntity deleteComment(@PathVariable("id") Integer postId,@PathVariable("commentId") Integer commentId){
         try {
             commentService.deleteComment(postId,commentId);
         }
@@ -53,7 +49,7 @@ public class CommentController {
     }
 
     @PutMapping("/update-comment/{commentId}")
-    public ResponseEntity updatePost(@PathVariable("id") String postId,@PathVariable("commentId") String commentId,@Valid @ModelAttribute CommentDTO commentDTO){
+    public ResponseEntity updatePost(@PathVariable("id") Integer postId,@PathVariable("commentId") Integer commentId,@Valid @ModelAttribute CommentDTO commentDTO){
         try {
             commentService.updateComment(postId, commentId, commentDTO);
         }

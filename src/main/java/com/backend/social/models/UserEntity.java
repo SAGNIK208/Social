@@ -3,18 +3,19 @@ package com.backend.social.models;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.*;
 import javax.validation.constraints.*;
 
 @Data
 @NoArgsConstructor
-@Document(collection = "users")
+@Entity
+@Table(name="users")
 public class UserEntity {
 
     @Id
-    public String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Integer id;
 
     @NotNull
     public String name;

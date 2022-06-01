@@ -16,7 +16,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -42,7 +41,7 @@ public class CommentService {
         return user;
     }
 
-    public void createComment(CommentDTO comment,String postId) throws InvalidPostException {
+    public void createComment(CommentDTO comment,Integer postId) throws InvalidPostException {
         UserEntity user = getAuthenticatedUser();
         Optional<PostEntity> post = postRepository.findById(postId);
         if(post.isPresent()){
@@ -58,7 +57,7 @@ public class CommentService {
         }
     }
 
-    public void deleteComment(String postId,String commentId) throws InvalidPostException , UnauthorizedUserException , InvalidCommentException {
+    public void deleteComment(Integer postId,Integer commentId) throws InvalidPostException , UnauthorizedUserException , InvalidCommentException {
         UserEntity user = getAuthenticatedUser();
         Optional<PostEntity> post = postRepository.findById(postId);
         if(post.isPresent()){
@@ -80,7 +79,7 @@ public class CommentService {
         }
     }
 
-    public void updateComment(String postId,String commentId,CommentDTO commentDTO) throws InvalidPostException , UnauthorizedUserException , InvalidCommentException {
+    public void updateComment(Integer postId,Integer commentId,CommentDTO commentDTO) throws InvalidPostException , UnauthorizedUserException , InvalidCommentException {
         UserEntity user = getAuthenticatedUser();
         Optional<PostEntity> post = postRepository.findById(postId);
         if(post.isPresent()){

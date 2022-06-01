@@ -50,11 +50,14 @@ public class MySecurity extends WebSecurityConfigurerAdapter {
                 .authorizeHttpRequests()
                 .antMatchers("/register").permitAll()
                 .antMatchers("/login").permitAll()
+                .antMatchers("/h2-console/*").permitAll()
                 .anyRequest().authenticated()
                 .and()
 //                .oauth2Login();
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        http.headers().frameOptions().disable();
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 

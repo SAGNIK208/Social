@@ -34,7 +34,7 @@ public class PostController {
     }
 
     @DeleteMapping("/delete-post/{id}")
-    public ResponseEntity deletePost(@PathVariable("id") String id){
+    public ResponseEntity deletePost(@PathVariable("id") Integer id){
         try {
             postService.deletePost(id);
         }
@@ -48,7 +48,7 @@ public class PostController {
     }
 
     @PutMapping("/update-post/{id}")
-    public ResponseEntity updatePost(@PathVariable("id") String id,@Valid @ModelAttribute PostDTO postDTO){
+    public ResponseEntity updatePost(@PathVariable("id") Integer id,@Valid @ModelAttribute PostDTO postDTO){
         try {
             postService.updatePost(postDTO,id);
         }

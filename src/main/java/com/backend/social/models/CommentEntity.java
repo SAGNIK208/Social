@@ -2,25 +2,26 @@ package com.backend.social.models;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
-@Document(collection = "comments")
+@Entity
+@Table(name = "comments")
 public class CommentEntity {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
     @NotNull
     private String comment;
 
     @NotNull
-    private String postId;
+    private Integer userId;
 
     @NotNull
-    private String userId;
+    private Integer postId;
 }

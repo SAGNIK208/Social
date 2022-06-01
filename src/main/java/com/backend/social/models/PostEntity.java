@@ -2,27 +2,33 @@ package com.backend.social.models;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
-@Document(collection = "posts")
+@Entity
+@Table(name = "posts")
 public class PostEntity {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
     @NotNull
     private String post;
 
     @NotNull
-    private String userId;
+    private Integer userId;
 
+    @OneToMany(
+            mappedBy = "postId",
+            cascade = CascadeType.REMOVE,
+            orphanRemoval = true
+    )
     private List<CommentEntity> comments = new ArrayList<>();
 
     public void addComment(CommentEntity comment){
